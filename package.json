@@ -1,12 +1,12 @@
 {
-  "name": "node-metamask",
+  "name": "node-metamask-oiaren",
   "version": "1.1.2",
   "description": "🦊 Connect to MetaMask from node.js",
-  "author": "Christian Maniewski <chris@colony.io>",
+  "author": "Christian Maniewski (oiaren update)",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/JoinColony/node-metamask.git"
+    "url": "https://github.com/oiaren/node-metamask.git"
   },
   "main": "index.js",
   "scripts": {
