@@ -24,21 +24,29 @@
 
   const execute = (requestId, method, params) =>
     new Promise((resolve, reject) => {
-      const splitMethod = method.split('_');
+      const paramsArray = params || [];
+      let methodToSplit = method;
+      if (method.method) {
+        methodToSplit = method.method;
+      }
+      const splitMethod = methodToSplit.split('_');
       const scope = splitMethod[0];
       const functionName = splitMethod[1];
-      params.push((err, result) => {
+      paramsArray.push((err, result) => {
         if (err) {
           return reject(err);
         }
         addLog(
           `Request ID: ${requestId}
-          Result from ${method}: ${JSON.stringify(result)}`,
+          Result from ${methodToSplit}: ${JSON.stringify(result)}`,
         );
         return resolve(result);
       });
       try {
-        web3[scope][functionName](...params);
+        if (functionName === 'chainId') {
+          paramsArray[paramsArray.length - 1](null, 1);
+        }
+        web3[scope][functionName](...paramsArray);
       } catch (e) {
         reject(e);
       }
